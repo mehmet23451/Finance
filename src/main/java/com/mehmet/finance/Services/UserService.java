@@ -16,4 +16,5 @@ public class UserService {
     public User getUserById(Long id){
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı! ID: " + id));
     }
+
 }
