@@ -3,6 +3,7 @@ package com.mehmet.finance.controllers;
 import com.mehmet.finance.dtos.AssetDTO;
 import com.mehmet.finance.dtos.AssetDTOIU;
 import com.mehmet.finance.services.impl.AssetServiceImpl;
+import com.mehmet.finance.services.impl.FinanceServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,12 @@ import java.util.List;
 public class AssetController {
 
     private final AssetServiceImpl assetServiceImpl;
-
+    private final FinanceServiceImpl financeService;
     @PostMapping("/user/{userId}")
     public ResponseEntity<AssetDTO> addAsset(@PathVariable Long userId, @Valid @RequestBody AssetDTOIU dtoiu) {
-        return ResponseEntity.ok(assetServiceImpl.addAsset(userId, dtoiu));
+        AssetDTO assetDTO= assetServiceImpl.addAsset(userId,dtoiu);
+        financeService.calculate(userId);
+        return ResponseEntity.ok(assetDTO);
     }
 
 

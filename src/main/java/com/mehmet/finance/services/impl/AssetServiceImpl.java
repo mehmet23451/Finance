@@ -25,6 +25,7 @@ public class AssetServiceImpl implements AssetService {
         asset.setUser(user);
 
         Asset savedAsset=assetRepository.save(asset);
+
         AssetDTO dto= new AssetDTO();
         BeanUtils.copyProperties(savedAsset,dto);
         dto.setUserId(savedAsset.getUser().getId());
