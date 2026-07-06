@@ -2,6 +2,7 @@ package com.mehmet.finance.controllers;
 
 import com.mehmet.finance.dtos.AssetDTO;
 import com.mehmet.finance.dtos.AssetDTOIU;
+import com.mehmet.finance.services.FinanceService;
 import com.mehmet.finance.services.impl.AssetServiceImpl;
 import com.mehmet.finance.services.impl.FinanceServiceImpl;
 import jakarta.validation.Valid;
@@ -18,7 +19,7 @@ import java.util.List;
 public class AssetController {
 
     private final AssetServiceImpl assetServiceImpl;
-    private final FinanceServiceImpl financeService;
+    private final FinanceService financeService;
     @PostMapping("/user/{userId}")
     public ResponseEntity<AssetDTO> addAsset(@PathVariable Long userId, @Valid @RequestBody AssetDTOIU dtoiu) {
         AssetDTO assetDTO= assetServiceImpl.addAsset(userId,dtoiu);

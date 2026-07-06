@@ -2,6 +2,8 @@ package com.mehmet.finance.controllers;
 
 import com.mehmet.finance.dtos.ExpenseDTO;
 import com.mehmet.finance.dtos.ExpenseDTOIU;
+import com.mehmet.finance.services.ExpenseService;
+import com.mehmet.finance.services.FinanceService;
 import com.mehmet.finance.services.impl.ExpenseServiceImpl;
 import com.mehmet.finance.services.impl.FinanceServiceImpl;
 import jakarta.validation.Valid;
@@ -18,8 +20,8 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ExpenseController {
 
-    private final ExpenseServiceImpl expenseServiceImpl;
-    private final FinanceServiceImpl financeService;
+    private final ExpenseService expenseServiceImpl;
+    private final FinanceService financeService;
     @PostMapping("/user/{userId}")
     public ResponseEntity<ExpenseDTO> addExpense(@PathVariable Long userId, @Valid @RequestBody ExpenseDTOIU dtoiu) {
         ExpenseDTO expenseDTO= expenseServiceImpl.addExpense(userId,dtoiu);

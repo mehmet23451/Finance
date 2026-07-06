@@ -1,6 +1,6 @@
 package com.mehmet.finance.controllers;
 
-import com.mehmet.finance.services.impl.FinanceServiceImpl;
+import com.mehmet.finance.services.FinanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +14,11 @@ import java.math.BigDecimal;
 @RequestMapping("/api/finance")
 @RequiredArgsConstructor
 public class FinanceController {
-    private final FinanceServiceImpl financeServiceImpl;
+    private final FinanceService financeService;
 
     @GetMapping("/calculate/{userId}")
     public ResponseEntity<BigDecimal> calculate(@PathVariable Long userId){
-        BigDecimal result= financeServiceImpl.calculate(userId);
+        BigDecimal result= financeService.calculate(userId);
         return ResponseEntity.ok(result);
     }
 

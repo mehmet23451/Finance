@@ -2,8 +2,9 @@ package com.mehmet.finance.controllers;
 
 import com.mehmet.finance.dtos.IncomeDTO;
 import com.mehmet.finance.dtos.IncomeDTOIU;
+import com.mehmet.finance.services.FinanceService;
+import com.mehmet.finance.services.IncomeService;
 import com.mehmet.finance.services.impl.FinanceServiceImpl;
-import com.mehmet.finance.services.impl.IncomeServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +17,16 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class IncomeController {
-    private final IncomeServiceImpl incomeServiceImpl;
-    private final FinanceServiceImpl financeService;
+    private final IncomeService incomeService;
+    private final FinanceService financeService;
     @PostMapping("/user/{userId}")
     public ResponseEntity<IncomeDTO> addIncome(@PathVariable Long userId,@Valid @RequestBody IncomeDTOIU dtoiu){
-        IncomeDTO incomeDTO= incomeServiceImpl.addIncome(userId,dtoiu);
+        IncomeDTO incomeDTO= incomeService.addIncome(userId,dtoiu);
         financeService.calculate(userId);
         return ResponseEntity.ok(incomeDTO);
     }
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<IncomeDTO>> getIncomesByUserId(@PathVariable Long userId){
-        return ResponseEntity.ok(incomeServiceImpl.getIncomesByUserId(userId));
+        return ResponseEntity.ok(incomeService.getIncomesByUserId(userId));
     }
 }
