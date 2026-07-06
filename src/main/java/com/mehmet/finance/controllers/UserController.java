@@ -2,7 +2,6 @@ package com.mehmet.finance.controllers;
 
 import com.mehmet.finance.entities.User;
 import com.mehmet.finance.services.UserService;
-import com.mehmet.finance.services.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
